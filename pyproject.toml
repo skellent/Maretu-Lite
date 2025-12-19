@@ -1,7 +1,7 @@
 [project]
 name = "maretu-lite"
-version = "0.0.1"
-description = ""
+version = "0.0.2"
+description = "Maretu (Skell's Maretu Lite) es una aplicación de punto de venta para dispositivos Android y próximamente ejecutable en Windows; funcionando completamente de manera local sin dependencias al internet."
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
