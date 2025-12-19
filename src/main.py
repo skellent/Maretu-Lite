@@ -1,28 +1,33 @@
 import flet as ft
 
 def main(page: ft.Page):
-    page.title = "Flet counter example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-
-    txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
-
-    def minus_click(e):
-        txt_number.value = str(int(txt_number.value) - 1)
-        page.update()
-
-    def plus_click(e):
-        txt_number.value = str(int(txt_number.value) + 1)
-        page.update()
-
-    page.add(
-        ft.Row(
-            [
-                ft.IconButton(ft.Icons.REMOVE, on_click=minus_click),
-                txt_number,
-                ft.IconButton(ft.Icons.ADD, on_click=plus_click),
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-        )
+    page.title = "Skell's Maretu Lite"
+    # page.window.full_screen = True
+    page.fonts = {
+        "Comfortaa": "../fonts/comfortaa.ttf"
+    }
+    page.theme = ft.Theme(
+        font_family = "Comfortaa"
+    )
+    page.appbar = ft.AppBar(
+        leading = ft.Container(
+            content = ft.Image(
+                src = "./icon-white.svg",
+                fit = ft.ImageFit.CONTAIN,
+            ),
+            padding = 8
+        ),
+        title = ft.Text(
+            "Skell's Maretu Lite",
+            color = ft.Colors.WHITE
+        ),
+        center_title = True,
+        bgcolor = ft.Colors.DEEP_PURPLE
     )
 
-ft.app(main)
+    page.update()
+
+ft.app(
+    target = main,
+    assets_dir = "assets"
+)
