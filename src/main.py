@@ -1,65 +1,49 @@
 import flet as ft
-from widgets.botonMenu import BotonMenu
+from views.principal     import principal
+from views.ventas        import ventas
+from views.reportes      import reportes
+from views.inventario    import inventario
+from views.clientes      import clientes
+from views.configuracion import configuracion
+from widgets.botonMenu   import BotonMenu
+from typing              import Any
 
-def main(page: ft.Page):
+def main(page: ft.Page) -> Any:
     page.title = "Skell's Maretu Lite"
-    # page.window.full_screen = True
+    page.window.full_screen = True
     page.fonts = {
         "Comfortaa": "../fonts/comfortaa.ttf"
     }
     page.theme = ft.Theme(
+        color_scheme_seed = ft.Colors.DEEP_PURPLE,
         font_family = "Comfortaa"
     )
-    page.appbar = ft.AppBar(
-        leading = ft.Container(
-            content = ft.Image(
-                src = "./icon-white.svg",
-                fit = ft.ImageFit.CONTAIN,
-            ),
-            padding = 8
-        ),
-        title = ft.Text(
-            "Skell's Maretu Lite",
-            color = ft.Colors.WHITE
-        ),
-        center_title = True,
-        bgcolor = ft.Colors.DEEP_PURPLE
-    )
 
-    layout = ft.Column(
-        expand = True,
-        spacing = 15,
-        controls=[
-            # Fila 1 (2 botones)
-            ft.Row(
-                expand = True,
-                spacing = 15,
-                controls = [
-                    BotonMenu("Ventas", ft.Icons.ADD_SHOPPING_CART),
-                    BotonMenu("Reportes", ft.Icons.ATTACH_MONEY),
-                ]
-            ),
-            # Fila 2 (2 botones)
-            ft.Row(
-                expand = True,
-                spacing = 15,
-                controls = [
-                    BotonMenu("Inventario", ft.Icons.ALL_INBOX),
-                    BotonMenu("Clientes", ft.Icons.GROUP),
-                ]
-            ),
-            # Fila 3 (1 botón ancho total)
-            ft.Row(
-                expand = True,
-                controls = [
-                    BotonMenu("Configuración", ft.Icons.SETTINGS),
-                ]
-            ),
-        ]
-    )
+    def cambioDeRuta(route):
+        page.views.clear()
+        if page.route == "/":
+            page.views.append(principal(page))
+        elif page.route == "/ventas":
+            page.views.append(ventas(page))
+        elif page.route == "/reportes":
+            page.views.append(reportes(page))
+        elif page.route == "/inventario":
+            page.views.append(inventario(page))
+        elif page.route == "/clientes":
+            page.views.append(clientes(page))
+        elif page.route == "/configuracion":
+            page.views.append(configuracion(page))
+        page.update()
 
-    page.add(layout)
+    def eliminarVista(view):
+        page.views.pop()
+        top_view = page.views[-1]
+        page.go(top_view.route)
 
+    page.on_route_change = cambioDeRuta
+    page.on_view_pop = eliminarVista
+    
+    page.go(page.route)
     page.update()
 
 ft.app(

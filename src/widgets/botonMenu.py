@@ -1,19 +1,18 @@
 import flet as ft
 
 class BotonMenu(ft.Container):
-    def __init__(self, texto, icono, color = ft.Colors.DEEP_PURPLE, al_clic = None):
+    def __init__(self, texto, icono, color = ft.Colors.DEEP_PURPLE, on_click = None):
         super().__init__()
         self.expand = True 
         self.bgcolor = color
-        self.border_radius = 25
+        self.border_radius = 50
         self.ink = True
-        self.
-        self.on_click = lambda e: print("¡Contenedor tocado!")
+        self.on_click = on_click
         self.content = ft.Column(
             [
                 ft.Icon(
                     name = icono,
-                    size = 40,
+                    size = 75,
                     color = ft.Colors.WHITE
                 ),
                 ft.Text(
