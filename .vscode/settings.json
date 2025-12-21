@@ -9,12 +9,6 @@
             "driver": "SQLite",
             "database": "${workspaceFolder:Maretu-Lite}/src/database/maretu.db",
             "name": "Maretu's Lite DataBase"
-        },
-        {
-            "previewLimit": 50,
-            "driver": "SQLite",
-            "database": "${workspaceFolder:Maretu-Lite}/src/database/testing.db",
-            "name": "Maretu's Testing DB"
         }
     ]
 }

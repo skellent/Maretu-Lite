@@ -1,0 +1,1 @@
+SELECT categoria, nombre, proveedor, precio FROM productos;
