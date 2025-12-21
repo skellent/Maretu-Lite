@@ -59,7 +59,7 @@ def principal(page: ft.Page) -> Any:
             ft.AppBar(
                 leading = ft.Container(
                     content = ft.Image(
-                        src = "./icon-white.svg",
+                        src = "img/icon-white.svg",
                         fit = ft.ImageFit.CONTAIN,
                     ),
                     padding = 8

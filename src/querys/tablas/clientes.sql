@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS clientes(
+    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    cedula   INTEGER NOT NULL UNIQUE,
+    nombre   TEXT NOT NULL,
+    telefono TEXT
+);

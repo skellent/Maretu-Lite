@@ -1,0 +1,1 @@
+SELECT cedula, nombre, telefono FROM clientes;
