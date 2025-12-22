@@ -22,6 +22,12 @@ class MaretuSQL():
         with open(ruta_absoluta, "r", encoding="utf-8") as f:
             return f.read()
 
+    def RemplazarArgumentos(instancia, texto:str, diccionario: dict) -> str:
+        nuevoTexto: str = texto
+        for llave in diccionario:
+            nuevoTexto = nuevoTexto.replace(llave, diccionario[llave])
+        return nuevoTexto
+
 if __name__ == "__main__":
     maretuSQL: MaretuSQL = MaretuSQL("../database/testing.db")
     consulta: str = maretuSQL.Leer("../querys/tablas/clientes.sql")

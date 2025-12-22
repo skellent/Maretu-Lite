@@ -3,7 +3,7 @@ INSERT INTO clientes(
     nombre,
     telefono)
 VALUES(
-    1,
+    <cedula>,
     "<nombre>",
     "<telefono>"
 )
