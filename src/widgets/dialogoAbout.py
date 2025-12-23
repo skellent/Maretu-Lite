@@ -11,7 +11,7 @@ class DialogoAbout(ft.AlertDialog):
             actions = [
                 ft.TextButton(
                     "Aceptar",
-                    on_click = self.page.close(self)
+                    on_click = lambda e: self.page.close(self)
                 )
             ],
             actions_alignment = ft.MainAxisAlignment.END,

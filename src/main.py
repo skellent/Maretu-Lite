@@ -8,10 +8,42 @@ from views.configuracion import configuracion
 from typing              import Any
 
 def main(page: ft.Page) -> Any:
+    def cambiarColor() -> ft.Colors:
+        color: str|None = page.client_storage.get("color")
+        if color == None:
+            return ft.Colors.DEEP_PURPLE
+        else:
+            match color:
+                case "purple":
+                    return ft.Colors.DEEP_PURPLE
+                case "green":
+                    return ft.Colors.GREEN
+                case "blue":
+                    return ft.Colors.BLUE
+                case "red":
+                    return ft.Colors.RED
+                
+    def cambiarTema() -> ft.ThemeMode:
+        tema: str|None = page.client_storage.get("tema")
+        if tema == None:
+            if page.platform_brightness == ft.Brightness.LIGHT:
+                return ft.ThemeMode.LIGHT 
+            else:
+                return ft.ThemeMode.DARK
+        else:
+            match tema:
+                case "claro":
+                    return ft.ThemeMode.LIGHT
+                case "oscuro":
+                    return ft.ThemeMode.DARK
+                case "sistema":
+                    return page.platform_brightness
+
     page.title = "Skell's Maretu Lite"
     page.fonts = {"Comfortaa": "fonts/comfortaa.ttf"}
+    page.theme_mode = cambiarTema()
     page.theme = ft.Theme(
-        color_scheme_seed = page.client_storage.get("color") if page.client_storage.get("color") != None else ft.Colors.GREEN,
+        color_scheme_seed = cambiarColor(),
         font_family = "Comfortaa",
         use_material3 = True
     )

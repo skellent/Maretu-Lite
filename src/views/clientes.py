@@ -1,13 +1,16 @@
 import os
 import flet as ft
 from widgets.dialogoAbout import DialogoAbout
-from modules.maretuSQL import MaretuSQL
-from typing            import Any
+from widgets.appBar       import AppBarSecundaria
+from modules.maretuSQL    import MaretuSQL
+from typing               import Any
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 SRC_DIR     = os.path.dirname(CURRENT_DIR)
 
 def clientes(page: ft.Page) -> Any:
+    dialogoAbout: DialogoAbout = DialogoAbout(page)
+
     ruta_sql_tabla = os.path.join(SRC_DIR, "querys", "tablas", "clientes.sql")
     ruta_sql_ver = os.path.join(SRC_DIR, "querys", "consultas", "verClientes.sql")
     ruta_db = "No definida aún"
@@ -104,30 +107,7 @@ def clientes(page: ft.Page) -> Any:
             "/clientes",
             padding  = 0, 
             controls = [
-                ft.AppBar(
-                    leading = ft.IconButton(
-                        icon = ft.Icons.ARROW_BACK_IOS_NEW,
-                        icon_color = ft.Colors.WHITE,
-                        on_click = lambda _: page.go("/")
-                    ),
-                    title = ft.Text(
-                        "Clientes",
-                        color = ft.Colors.WHITE
-                    ),
-                    center_title = True,
-                    bgcolor = ft.Colors.DEEP_PURPLE,
-                    actions = [
-                        ft.PopupMenuButton(
-                            items      = [
-                                ft.PopupMenuItem(
-                                    text = "Acerca de",
-                                    icon = ft.Icons.INFO,
-                                    on_click = lambda e: page.open(dialogoAbout))
-                            ],
-                            icon_color = ft.Colors.WHITE
-                        )
-                    ],
-                ),
+                AppBarSecundaria(page, dialogoAbout, "Clientes"),
                 ft.Tabs(
                     selected_index = 0,
                     animation_duration = 300,
