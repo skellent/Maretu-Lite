@@ -1,6 +1,6 @@
 import os
 import flet as ft
-from widgets.dialogoAbout import dialogoAbout
+from widgets.dialogoAbout import DialogoAbout
 from modules.maretuSQL import MaretuSQL
 from typing            import Any
 

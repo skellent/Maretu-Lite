@@ -1,7 +1,7 @@
 import flet as ft
 
 class BotonMenu(ft.Container):
-    def __init__(self, texto, icono, color = ft.Colors.DEEP_PURPLE, on_click = None):
+    def __init__(self, texto, icono, color = "primary", on_click = None):
         super().__init__()
         self.expand = True 
         self.bgcolor = color
@@ -13,11 +13,11 @@ class BotonMenu(ft.Container):
                 ft.Icon(
                     name = icono,
                     size = 75,
-                    color = ft.Colors.WHITE
+                    color = "onprimary"
                 ),
                 ft.Text(
                     value = texto,
-                    color = ft.Colors.WHITE,
+                    color = "onprimary",
                     weight = ft.FontWeight.BOLD,
                     text_align = ft.TextAlign.CENTER
                 ),

@@ -1,11 +1,18 @@
 import flet as ft
+from typing import Any
 
-dialogoAbout = ft.AlertDialog(
-    modal = True,
-    title = ft.Text("Skell's Maretu Lite"),
-    content = ft.Text("Aplicación de punto de venta local para Android y Windows."),
-    actions = [
-        ft.TextButton("Aceptar", on_click = lambda e: page.close(dialogoAbout))
-    ],
-    actions_alignment = ft.MainAxisAlignment.END
-)
+class DialogoAbout(ft.AlertDialog):
+    def __init__(self, page: ft.Page) -> Any:
+        self.page = page
+        super().__init__(
+            modal = True,
+            title = ft.Text("Skell's Maretu Lite"),
+            content = ft.Text("Aplicación de punto de venta local para Android y Windows."),
+            actions = [
+                ft.TextButton(
+                    "Aceptar",
+                    on_click = self.page.close(self)
+                )
+            ],
+            actions_alignment = ft.MainAxisAlignment.END,
+        )
