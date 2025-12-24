@@ -22,7 +22,6 @@ def main(page: ft.Page) -> Any:
                     return ft.Colors.BLUE
                 case "red":
                     return ft.Colors.RED
-                
     def cambiarTema() -> ft.ThemeMode:
         tema: str|None = page.client_storage.get("tema")
         if tema == None:
@@ -63,7 +62,6 @@ def main(page: ft.Page) -> Any:
         elif page.route == "/configuracion":
             page.views.append(configuracion(page))
         page.update()
-
     def eliminarVista(view) -> None:
         if len(page.views) > 1:
             page.views.pop()
@@ -72,7 +70,7 @@ def main(page: ft.Page) -> Any:
 
     page.on_route_change = cambioDeRuta
     page.on_view_pop = eliminarVista
-    
+
     page.go(page.route)
     page.update()
 

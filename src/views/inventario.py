@@ -1,7 +1,9 @@
 import flet as ft
+from typing               import Any
 from widgets.dialogoAbout import DialogoAbout
 from widgets.appBar       import AppBarSecundaria
-from typing import Any
+from modules              import configurarRuta
+from modules.maretuSQL    import MaretuSQL
 
 def inventario(page: ft.Page) -> Any:
     dialogoAbout: DialogoAbout = DialogoAbout(page)
@@ -15,10 +17,9 @@ def inventario(page: ft.Page) -> Any:
                 animation_duration = 300,
                 scrollable = False, 
                 expand = True,
-                indicator_color = ft.Colors.DEEP_PURPLE_ACCENT,
                 tabs = [
                     ft.Tab(
-                        text = "Listado",
+                        text = "Productos",
                         icon = ft.Icons.ALL_INBOX,
                         content = ft.Container(
                             content = None,
@@ -29,7 +30,7 @@ def inventario(page: ft.Page) -> Any:
                         text = "Agregar",
                         icon = ft.Icons.ADD_BOX,
                         content = ft.Container(
-                            content = ft.Text("Formulario de registro aquí"),
+                            content = None,
                             alignment = ft.alignment.center
                         ),
                     ),
@@ -37,7 +38,7 @@ def inventario(page: ft.Page) -> Any:
                         text = "Stock",
                         icon = ft.Icons.NUMBERS,
                         content = ft.Container(
-                            content = ft.Text("Formulario de Stock aquí"),
+                            content = None,
                             alignment = ft.alignment.center
                         ),
                     )
