@@ -14,6 +14,8 @@ class Error(VistaSecundaria):
                     controls = [
                         ft.Icon(ft.Icons.ERROR_OUTLINE, color = "red", size = 50),
                         ft.Text("Error Crítico", size = 25, weight = "bold", color = "red"),
+                        ft.Text(f"Detalle: {str(instancia.pagina.client_storage.get("error"))}", size = 16, selectable = True, italic = True),
+                        ft.Divider(),
                         ft.ElevatedButton("Volver al Inicio", on_click = lambda _: instancia.pagina.go("/"))
                     ], 
                     spacing = 10

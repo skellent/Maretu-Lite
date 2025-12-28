@@ -1,17 +1,12 @@
+# Importacion de Flet
 import flet as ft
-from typing               import Any
-from widgets.dialogoAbout import DialogoAbout
-from widgets.appBar       import AppBarSecundaria
-from modules              import configurarRuta
-from modules.maretuSQL    import MaretuSQL
+# Importacion de Vistas
+from views.base import VistaSecundaria
 
-def inventario(page: ft.Page) -> Any:
-    dialogoAbout: DialogoAbout = DialogoAbout(page)
-    return ft.View(
-        "/inventario",
-        padding = 0,
-        controls = [
-            AppBarSecundaria(page, dialogoAbout, "Inventario"),
+class Inventario(VistaSecundaria):
+    def __init__(instancia, pagina: ft.Page) -> None:
+        """Método de construcción"""
+        instancia.controles: list[ft.Container] = [
             ft.Tabs(
                 selected_index = 0,
                 animation_duration = 300,
@@ -45,4 +40,10 @@ def inventario(page: ft.Page) -> Any:
                 ]
             )
         ]
-    )
+        super().__init__(
+            pagina,
+            "Inventario",
+            instancia.controles,
+            "/inventario"
+        )
+        return None
