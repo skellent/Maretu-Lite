@@ -1,8 +1,12 @@
 # Importacion de Flet
 import flet as ft
 # Importacion de Vistas
-from views import principal
+from views.principal     import MenuPrincipal
+from views.configuracion import Configuracion
 # Importacion de Modulos
+
+# Importacion de Tipos
+from typing import Any
 
 # Clase Primaria
 class Primaria:
@@ -11,14 +15,26 @@ class Primaria:
         if len(instancia.page.views) > 1:
             instancia.page.views.pop()
             instancia.page.go( instancia.page.views[-1] )
+        return None
 
-    def cambioRuta(instancia, route: ft.Page.route):
+    def cambioRuta(instancia, route: ft.Page.route) -> None:
         """Método de cambio de ruta de la página"""
         instancia.pagina.views.clear()
-        match instancia.pagina.route:
-            case "/":
-                instancia.pagina.views.append( principal.principal(instancia.pagina) )
+        instancia.pagina.views.append( instancia.vistas.get(instancia.pagina.route).start() )
         instancia.pagina.update()
+        return None
+
+    def cambiarColor(instancia) -> ft.Colors:
+        instancia.pagina.client_storage.get("color")
+        match instancia.pagina.client_storage.get("color"):
+            case "purple"|None:
+                return ft.Colors.DEEP_PURPLE
+            case "green":
+                return ft.Colors.GREEN
+            case "blue":
+                return ft.Colors.BLUE
+            case "red":
+                return ft.Colors.RED
 
     def cambiarTema(instancia) -> ft.ThemeMode:
         """Método de Personalización a la página"""
@@ -33,22 +49,31 @@ class Primaria:
     def config(instancia) -> None:
         """Método de Personalización a la página"""
         instancia.pagina.title      = instancia.titulo
-        instancia.pagina.theme      = instancia.paleta
+        instancia.pagina.theme      = instancia.paleta.__replace__(color_scheme_seed = instancia.cambiarColor())
+        instancia.pagina.theme_mode = instancia.cambiarTema()
         instancia.pagina.on_route_change = instancia.cambioRuta
         instancia.pagina.on_view_pop = instancia.eliminarVista
+        # Creacion de Instancias de otras views
+        instancia.vistas: dict[str: Any] = {
+            "/":              MenuPrincipal(instancia.pagina),
+            "/configuracion": Configuracion(instancia.pagina)
+        }
         instancia.pagina.go("/")
-        # instancia.pagina.update() # Actualizar Cambios
+        return None
 
     def start(instancia, page: ft.Page) -> None:
         """Método de Inicio de Ejecución"""
         instancia.pagina: ft.Page = page
         instancia.config()
+        instancia.pagina.update()
+        return None
 
     def __init__(instancia, titulo: str, tipografia: dict[str: str], paleta: ft.Theme) -> None:
         """Método Constructor"""
         instancia.titulo: str                = titulo
         instancia.tipografia: dict[str: str] = tipografia
         instancia.paleta: ft.Theme           = paleta
+        return None
 
 # Proceso Principal
 if __name__ == "__main__":
