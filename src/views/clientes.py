@@ -31,6 +31,16 @@ class Clientes(VistaSecundaria):
                                 controls = None
                             )
                         ),
+                    ),
+                    ft.Tab(
+                        text = "Editar",
+                        icon = ft.Icons.EDIT,
+                        content = ft.Container(
+                            padding = 20,
+                            content = ft.Column(
+                                controls = None
+                            )
+                        ),
                     )
                 ]
             )
