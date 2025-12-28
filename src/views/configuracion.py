@@ -2,8 +2,6 @@
 import flet as ft
 # Importacion de Vistas
 from views.base import VistaSecundaria
-# Importacion de Widgets
-from widgets.dialogoAbout import DialogoAbout
 
 class Configuracion(VistaSecundaria):
     def cambiarColor(instancia) -> ft.Colors:
@@ -36,11 +34,13 @@ class Configuracion(VistaSecundaria):
             use_material3     = True
         )
         instancia.pagina.update()
+        return None
 
     def guardarTema(instancia, e: ft.EventType) -> None:
         instancia.pagina.client_storage.set("tema", instancia.temaConfiguracion.value)
         instancia.pagina.theme_mode = instancia.cambiarTema()
         instancia.pagina.update()
+        return None
 
     def __init__(instancia, pagina: ft.Page) -> None:
         """Método de construcción"""
@@ -150,67 +150,3 @@ class Configuracion(VistaSecundaria):
             "/configuracion"
         )
         return None
-        
-
-
-
-"""
-def configuracion(page: ft.Page) -> Any:
-    def cambiarColor() -> ft.Colors:
-        color: str|None = page.client_storage.get("color")
-        if color == None:
-            return ft.Colors.DEEP_PURPLE
-        else:
-            match color:
-                case "purple":
-                    return ft.Colors.DEEP_PURPLE
-                case "green":
-                    return ft.Colors.GREEN
-                case "blue":
-                    return ft.Colors.BLUE
-                case "red":
-                    return ft.Colors.RED
-    def cambiarTema() -> ft.ThemeMode:
-        tema: str|None = page.client_storage.get("tema")
-        if tema == None:
-            if page.platform_brightness == ft.Brightness.LIGHT:
-                return ft.ThemeMode.LIGHT 
-            else:
-                return ft.ThemeMode.DARK
-        else:
-            match tema:
-                case "claro":
-                    return ft.ThemeMode.LIGHT
-                case "oscuro":
-                    return ft.ThemeMode.DARK
-                case "sistema":
-                    return page.platform_brightness
-    def guardarColor(e) -> None:
-        page.client_storage.set("color", colorConfiguracion.value)
-        page.theme = ft.Theme( color_scheme_seed = cambiarColor() )
-        page.update()
-    def guardarTema(e) -> None:
-        page.client_storage.set("tema", temaConfiguracion.value)
-        page.theme_mode = cambiarTema()
-        page.update()
-
-    
-
-    if page.client_storage.get("color") == None:
-        colorConfiguracion.value = "purple" 
-    else:
-        colorConfiguracion.value = page.client_storage.get("color")
-    if page.client_storage.get("tema") == None:
-        temaConfiguracion.value = "sistema"
-    else:
-        temaConfiguracion.value = page.client_storage.get("tema")
-
-    dialogoAbout: DialogoAbout = DialogoAbout(page)
-    return ft.View(
-        "/configuracion",
-        controls = [
-            AppBarSecundaria(page, dialogoAbout, "Confguración"),
-            
-        ]
-    )
-"""

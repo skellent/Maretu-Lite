@@ -3,6 +3,8 @@ import flet as ft
 # Importacion de Vistas
 from views.principal     import MenuPrincipal
 from views.configuracion import Configuracion
+from views.clientes      import Clientes
+from views.error         import Error
 # Importacion de Modulos
 
 # Importacion de Tipos
@@ -20,7 +22,10 @@ class Primaria:
     def cambioRuta(instancia, route: ft.Page.route) -> None:
         """Método de cambio de ruta de la página"""
         instancia.pagina.views.clear()
-        instancia.pagina.views.append( instancia.vistas.get(instancia.pagina.route).start() )
+        try:
+            instancia.pagina.views.append( instancia.vistas.get(instancia.pagina.route).start() )
+        except Exception as error:
+            instancia.pagina.go("/error")
         instancia.pagina.update()
         return None
 
@@ -56,7 +61,9 @@ class Primaria:
         # Creacion de Instancias de otras views
         instancia.vistas: dict[str: Any] = {
             "/":              MenuPrincipal(instancia.pagina),
-            "/configuracion": Configuracion(instancia.pagina)
+            "/configuracion": Configuracion(instancia.pagina),
+            "/clientes":      Clientes( instancia.pagina ),
+            "/error":         Error( instancia.pagina )
         }
         instancia.pagina.go("/")
         return None
